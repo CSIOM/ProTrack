@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Reports
+    </title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<h4>Report 
+{% if report_type != '3' %}
+on {{project_name.title}}
+{% endif %}
+{% if report_type == '1' or report_type == '3' %}
+for {{username.username}},
+{% endif %}
+from {{start_date}} to {{end_date}}</h4>
+<div class="container-fluid">
+<table class="table table-hover table-striped">
+    <tr>
+        <!-- <th id="long-th">Self Rating</th> -->
+        {% if report_type == '2' %}
+        <th>User</th>
+        {% endif %}
+        {% if report_type == '3' %}
+        <th>Project</th>
+        {% endif %}
+        <th>Report Dated</th>
+        <th>Duration(Hours)</th>
+        <th>Work Done</th>
+        <th>Struggle</th>
+        <th>Self Rating</th>
+        <th>Tags</th>
+        <!-- <th>Rated</th> -->
+    </tr>
+    {% for value in var_list %}
+    <tr>
+        <!-- <td>{{value.self_rating}}</td> -->
+        {% if report_type == '2' %}
+        <td>{{value.daily_report__user__username}}</td>
+        {% endif %}
+        {% if report_type == '3' %}
+        <td>{{value.daily_report__project__project__title}}</td>
+        {% endif %}
+        <td>{{value.daily_report__date}}</td>
+        <td>{{value.duration_in_hours}}</td>
+        <td>{{value.work_done}}</td>
+        <td>{{value.struggle}}</td>
+        <td>{{value.self_rating}}</td>
+        <td>{{value.tags}}</td>
+        <!-- <td>{{value.daily_report__rating__rating}}</td> -->
+    </tr>
+    {% endfor %}
+</table>
+{% if report_type == '1' or report_type == '3' %}
+<h3>Total Time Dedicated: {{total_hours}} Hours {{total_minutes}} Minutes</h3>
+{% else %}
+<h3>Total Time: {{total_hours}} Hours {{total_minutes}} Minutes</h3>
+{% endif %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,12 @@
+.panel-items {
+    list-style-type: none;
+    margin-top: 200px;
+    margin-left: -44px;
+    width: 118%;
+}
+
+.panel-item{
+    display:inline;
+    padding-left: 29px;
+    padding-right: 32px;
+}

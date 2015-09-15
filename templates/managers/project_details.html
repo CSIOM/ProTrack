@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+		List Of Project
+	</title>
+	{% endblock %}
+	{% block extrajs %}
+	    <script src="{% static 'js/change_status.js' %}"></script>
+	    <script src="{% static 'js/history.js' %}"></script>
+	{% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<h3>{{project.title}}</h3>
+<a href="" id="{{project.id}}" class="view-history">View History</a>
+<table class="table table-hover table-striped ">
+	<tr>
+		<th>Code Name</th>
+		<th id='seprator'>:</th>
+		<td>{{project.project_code}}</td>
+	</tr>
+	<tr>
+		<th id="long-th">Technologies Used</th>
+		<th id='seprator'>:</th>
+		<td>{{project.technologies_required}}</td>
+	</tr>
+	<tr>
+		<th>Status</th>
+		<th id='seprator'>:</th>
+		<td> <span id='status'>{{status}}</span> {% if access_var == 1 %} <span class="change-status" id="{{project.id}}"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Status" /></span>{% endif %}</td>
+	</tr>
+	<tr>
+		<th>Estimated Time</th>
+		<th id='seprator'>:</th>
+		<td>{{project.estimated_time}}</td>
+	</tr>
+	<tr>
+		<th>Manager</th>
+		<th id='seprator'>:</th>
+		<td>{{project.manager}}</td>
+	</tr>
+	<tr>
+		<th>Summary</th>
+		<th id='seprator'>:</th>
+		<td>{{project.project_summary | safe}}</td>
+	</tr>
+	<tr>
+		<th>Team</th>
+		<th id='seprator'>:</th>
+		<td><span id='status'>{% for value in team_list %} 
+			{{value}}
+			{% if forloop.counter == team_size %}
+			{{empty}}
+			{% else %}
+			,
+			{% endif %}
+			{% endfor %}</span> {% if access_var == 1 %} <span class="edit-team"><a id="edit-link" href="{% url 'add_team'  %}?edit_id={{project.id}}"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Team" /></a></span>{% endif %}</td>
+	</tr>
+</table>
+{% endblock %}
+</div>
+</body>
+</html>

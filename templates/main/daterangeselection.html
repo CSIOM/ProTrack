@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Timely Reports Form
+    </title>
+    {% endblock %}
+    {% block extrajs %}
+        <script src="{% static 'js/project_members.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+
+<div class='add_post'>
+<form method='POST' action=''>
+{% csrf_token %}
+<table class="custom-form">
+{% for field in form %}
+    <div class="fieldWrapper">
+    {% if not field.errors %}
+    <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>{{ field }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+        <td class="has-error">{{ field }}</td>
+    </tr>
+    {% endif %}
+    </div>
+{% endfor %}
+<tr>
+	<td><br><span><input type="submit" name='report' id='report' class="btn btn-info btn-large btn-block" value="Report" ></td>
+</tr>
+</table>
+
+</form>
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

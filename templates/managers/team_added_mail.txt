@@ -1,0 +1,17 @@
+Hi {{user}},
+You will glad to know that due to your potential and previous work record, you have been selected as a team member in official team of project under CSIOM. Details of project are as bellow:
+
+Title:{{title}}
+Manager:{{manager}}
+Summary:{{summary}}
+for more information, click on [0]
+
+Hope that you'll enjoy working with {{manager}}.
+
+Best Wishes,
+Team@CSIOM
+
+
+Note: This is an automatic computer generated mail. No need to reply this.
+
+[0]:{{domain}}/options/?project={{project_id}}

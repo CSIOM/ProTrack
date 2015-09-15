@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+		Index
+	</title>
+	{% endblock %}
+</head>
+<body>
+{% block content %}
+<h1>Welcome {{user}}</h1>
+<br><br>
+<p>Your active projects are as:</p>
+<ol>
+{% for val in project %}
+	<li><a href="{% url 'project_options' %}/?project={{val.id}}">{{val}}</a></li>
+{% endfor %}
+</ol>
+
+{% endblock %}
+</body>
+</html>

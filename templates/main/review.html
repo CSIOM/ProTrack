@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Review
+    </title>
+    {% endblock %}
+    {% block extrajs %}
+        <script src="{% static 'js/get_open_for_review.js' %}"></script>
+        <script src="{% static 'js/report_summary.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+    <table class='custom-form'>
+<tr>
+    {% for field in form %}
+        <td><b>{{field.label}}:</b></td>
+        <td>{{ field }}</td>
+    {% endfor %}
+</tr>
+</table>
+<div id="open-for-review">
+
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

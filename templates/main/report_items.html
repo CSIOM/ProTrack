@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Report
+    </title>
+    {% endblock %}
+    {% block extrajs %}
+        <script src="{% static 'js/submit.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="back-button">
+    <script type="text/javascript">
+            document.write('<a href="javascript:history.back()" class="glyphicon glyphicon-arrow-left"></a> ');
+      </script>
+    </div>
+<h4>Report written by
+{% if login_user != written_by_info.user %}
+{{written_by_info.user__username}}
+{% else %}
+you
+{% endif %}
+for {{written_by_info.project__project__title}} on {{written_by_info.date}}</h4>
+<div class="container-fluid">
+<table class='table table-hover table-striped'>
+    <tr>
+        <th id="long-th-2">Self Rating</th>
+        <th id="long-th-2">Duration (hourly)</th>
+        <th>Work Done</th>
+        <th>Struggle</th>
+        <th>Tags</th>
+    </tr>
+    {% for value in list %}
+    <tr>
+        {% if rate_form_status %}
+        <td>Is Hidden</td>
+        {% else %}
+        <td>{{value.self_rating}}</td>
+        {% endif %}
+        <td>{{value.duration_in_hours}}</td>
+        <td>{{value.work_done | safe}}</td>
+        <td>{{value.struggle}}</td>
+        <td>{{value.tags}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+<h4>Comments Section</h4>
+{% if comments %}
+<br>
+{% for value in comments %}
+<div class='comment'>
+<span><pre class="pre-scrollable"><b>{{value.commenter__username}}{% if value.rating__rating %}(Rating-{{value.rating__rating}}){% endif %}</b>:{{value.comment | safe}}</span><br><small>{{value.date}} {{value.time}}</small></pre>
+</div>
+{% endfor %}
+{% endif %}
+<br><br>
+<form id="comment-form" method='POST' action="{% url 'comment' %}">
+    {% csrf_token %}
+
+<table>
+    <input type="hidden" name='report_id' id='comment' value="{{report}}" >
+    {% if rate_form_status %}
+{{rate_form.as_table}}
+{% endif %}
+{{form.as_table}}
+</table>
+<br>
+<input type="submit" name='submit' id='comment' class="btn btn-info btn-large" 
+value="Add Comment" >
+
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,125 @@
+{% load i18n %} 
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    {% endblock %}
+    {% block extrahead %}
+    <script type="text/javascript">
+        var reverseurl = "{% url 'src.main.views.jsreverse' %}";
+
+        function reverse(urlstring, callback) {
+            if (typeof callback != "function") {
+                return false;
+            }
+            
+            $.get(reverseurl + "?string=" + urlstring, callback);
+        }
+    </script>
+    {% endblock %}
+    {% block js %}
+        <script src="{% static 'js/jquery.min.js' %}">
+    </script>
+    <script src="{% static 'js/jquery-ui.min.js' %}">
+    </script>
+    <script src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
+    <script src="{% static 'js/bootstrap-timepicker.min.js' %}">
+    </script>
+    <script src="{% static 'js/bootstrap-dialog.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  <!--  <script src="{% static 'js/maintenance.js' %}"></script>-->
+
+    {% block extrajs %}{% endblock %}
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    {% if access_var == 1 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/manager_panel.css' %}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normal_user_panel.css' %}">
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-timepicker.min.css' %}">
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#id_published_date').datepicker({
+            changeMonth: true,
+            changeYear: true,dateFormat:"yy-mm-dd"
+        })
+        $('#id_published_date').datepicker( "option", "showAnim", "clip" )
+        
+      });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#id_start_date').datepicker({
+            changeMonth: true,
+            changeYear: true,dateFormat:"yy-mm-dd"
+        })
+        $('#id_start_date').datepicker( "option", "showAnim", "clip" )
+        $('#id_end_date').datepicker({
+            changeMonth: true,
+            changeYear: true,dateFormat:"yy-mm-dd"
+        })
+        $('#id_end_date').datepicker( "option", "showAnim", "clip" )
+      });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#id_date').datepicker({
+            changeMonth: true,
+            changeYear: true,dateFormat:"yy-mm-dd"
+        })
+        $('#id_date').datepicker( "option", "showAnim", "clip" )
+      });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#id_review_date').datepicker({
+            changeMonth: true,
+            changeYear: true,dateFormat:"yy-mm-dd"
+        })
+        $('#id_review_date').datepicker( "option", "showAnim", "clip" )
+      });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $('#id_duration_in_hours').timepicker({
+            defaultTime: 'value',
+            minuteStep: 1,
+            disableFocus: true,
+            template: 'dropdown',
+            showMeridian:false
+        });
+    });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.css' %}">
+
+</head>
+<body>
+    <div class = "wrapper">
+    <div class="top-bar" id="top">
+        <header id="header" class="header large-header">
+            <div class="heading-container">
+                <a id="heading" href="{% url 'home' %}"><h1 class="main-heading"><span class="head">CSIOM</span><span class='head'><img src="{% static 'icons/csiom.png' %}"></h1></a>
+            </div>
+            <nav class="primary-nav">
+                <ul>
+                <li><a href="{% url 'home' %}"><button class="home">Home</button></a></li>
+                <li><a href="{% url 'time_tracking' %}"><button class="timer_option">Time Tracker</button>
+                <li><a href="{% url 'report' %}/?add_report"><button class="add-report-link">Add Report</button></a></li>
+                <li><a href='{% url 'src.main.views.password_change' %}'><button class="change-password">Change Password</button></a></li>
+                <li><a href='{% url 'admin:logout' %}'><button class="log-out">Log Out</button></a></li>
+                </ul>
+            </nav>
+        </header>
+        </div>
+    <div class="main-container">
+               {% block content %}{% endblock %}
+            </div>
+    </div>  
+</body>
+</html>

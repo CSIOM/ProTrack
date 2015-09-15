@@ -1,0 +1,24 @@
+{% load i18n %} {% load staticfiles %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/summary.css' %}">
+</head>
+<body>
+
+<div class="container-fluid">
+<table class="table table-hover table-striped">
+            <tr>
+                <th>Status</th>
+                <th>Date Time</th>
+                <th>Remarks</th>
+            </tr>
+            {% for value in project_status_list %}
+            <tr>
+                <td width="20%">{{value.status__state}}</td>
+                <td width="20%">{{value.datetime}}</td>
+                <td width="35%">{{value.remarks | safe}}</td>
+            </tr>
+            {% endfor %}
+</table>
+</div>
+</body>

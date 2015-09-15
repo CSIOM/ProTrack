@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+		List Of Project
+	</title>
+	{% endblock %}
+	{% block extrajs %}
+	    <script src="{% static 'js/change_project_title.js' %}"></script>
+	{% endblock %}
+
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<table class="table table-hover table-striped">
+	<tr>
+		<th>Title</th>
+		<th>Project Code</th>
+		<th>Technlogies</th>
+		<th>Estimated Time</th>
+		<th>Options</th>
+	</tr>
+	{% for value in list %}
+	<tr>
+		<td>{{value.title}} {% if access_var == 1 and method == 0 %} <span class="change-project-title" id="{{value.id}}"><i class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Project Title" /></span>{% endif %}</td>
+		<td>{{value.project_code}}</td>
+		<td>{{value.technologies_required}}</td>
+		<td>{{value.estimated_time}}</td>
+		<td><a href="{% url 'project_options' %}/?project={{value.id}}">more...</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+<a href="{% url 'project' %}?add_project=1"><input type="button" name='draft' id='draft' class="btn btn-info btn-large" value="Add Project" ></a>
+{% endblock %}
+</div>
+</body>
+</html>

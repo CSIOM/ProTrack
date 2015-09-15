@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Notifications
+    </title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<table class="table table-hover table-striped notify-table">
+    <th>Notifier</th>
+    <th id="long-th">Notification Type</th>
+    <th>Project</th>
+    <th>Date Time</th>
+    <th>Options</th>
+    {% for value in val_list %}
+    {% if value.is_read == 0 %}
+    <tr class="info">
+        {% if value.reportnotifications__report__user__username == None %}
+            {% if value.commentnotifications__comment__commenter__username == None %}
+                <td>{{value.teamaddednotifications__project_details__manager__username}}</td>
+                <td>{{value.notification_type__name}}</td>
+                <td>{{value.teamaddednotifications__project_details__title}}</td>
+                <td>{{value.date_time.date}} | {{value.date_time.time | time:"H:i A"}}</td>
+                <td><a href="{% url 'project_options' %}/?project={{value.teamaddednotifications__project_details__id}}&notice={{value.id}}&review">View</a></td>
+            {% else %}
+                <td>{{value.commentnotifications__comment__commenter__username}}</td>
+                <td>{{value.notification_type__name}}</td>
+                <td>{{value.commentnotifications__report__project__project__title}}</td>
+                <td>{{value.commentnotifications__report__date}} | {{value.commentnotifications__report__time | time:"H:i A"}}</td>
+                <td><a href="{% url 'view_report' %}/?report_id={{value.commentnotifications__report}}&report_info&notice_id={{value.id}}&comment&review">View</a></td>
+            {% endif %}
+        {% else %}
+    <td>{{value.reportnotifications__report__user__username}}</td>
+    <td>{{value.notification_type__name}}</td>
+    <td>{{value.reportnotifications__report__project__project__title}}</td>
+    <td>{{value.reportnotifications__report__date}} | {{value.reportnotifications__report__time | time:"H:i A"}}</td>
+    <td><a href="{% url 'view_report' %}/?report_id={{value.reportnotifications__report}}&report_info&notice_id={{value.id}}&report&review">View</a>
+    </td>
+    {% endif %}
+</tr>
+    {% else %}
+    <tr>
+        {% if value.reportnotifications__report__user__username == None %}
+            {% if value.commentnotifications__comment__commenter__username == None %}
+                <td>{{value.teamaddednotifications__project_details__manager__username}}</td>
+                <td>{{value.notification_type__name}}</td>
+                <td>{{value.teamaddednotifications__project_details__title}}</td>
+                <td>{{value.date_time.date}} | {{value.date_time.time | time:"H:i A"}}</td>
+                <td><a href="{% url 'project_options' %}/?project={{value.teamaddednotifications__project_details__id}}">View</a></td>
+            {% else %}
+                <td>{{value.commentnotifications__comment__commenter__username}}</td>
+                <td>{{value.notification_type__name}}</td>
+                <td>{{value.commentnotifications__report__project__project__title}}</td>
+                <td>{{value.commentnotifications__report__date}} | {{value.commentnotifications__report__time | time:"H:i A"}}</td>
+                <td><a href="{% url 'view_report' %}/?report_id={{value.commentnotifications__report}}&report_info">View</a></td>
+            {% endif %}
+        {% else %}
+    <td>{{value.reportnotifications__report__user__username}}</td>
+    <td>{{value.notification_type__name}}</td>
+    <td>{{value.reportnotifications__report__project__project__title}}</td>
+    <td>{{value.reportnotifications__report__date}} | {{value.reportnotifications__report__time | time:"H:i A"}}</td>
+    <td><a href="{% url 'view_report' %}/?report_id={{value.reportnotifications__report}}&report_info">View</a>
+    </td>
+    {% endif %}
+</tr>
+{% endif %}
+    
+    {% endfor %}
+</table>
+</div>
+{% endblock %}
+</body>
+</html>

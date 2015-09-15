@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Report Options
+    </title>
+    {% endblock %}
+    {% block extrajs %}
+        <script src="{% static 'js/view_option.js' %}"></script>
+        <script src="{% static 'js/report_result.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<div class='add_post'>
+<form method='POST' action=''>
+
+    <div class="form-group">
+{% csrf_token %}
+<table class='custom-form'>
+<tr>
+    <td><ul class="nav nav-pills">
+  <li role="presentation" class="active"><a class="glyphicon glyphicon-retweet" href="{% url 'view_report' %}?list_report">&nbsp;My Reports</a></li>
+  <li role="presentation" class="active"><a class="glyphicon glyphicon-time" href="{% url 'timely_reports' %}?list_report">&nbsp;Timely Reports</a></li>
+</ul><br></td>
+</tr>
+<!--<tr>
+{{ form.non_field_errors }}
+<td>
+    {{ form.view.errors }}
+    <label for="id_view">View:</label>
+    {{form.view }}
+</td>
+</tr>
+<tr class="class_project">
+<td>
+    {{ form.project.errors }}
+    <label for="id_project">Project:</label>
+    {{ form.project }}
+</td>
+</tr>
+-->
+</table>
+</div>
+</form>
+</div>
+<div id='reportdatadiv'>
+    
+</div>
+{% endblock %}
+</body>
+</html>

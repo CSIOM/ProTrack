@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        Report Options
+    </title>
+</head>
+<body>
+<table class="table table-hover table-striped ">
+{% if view_val == 1 %}
+{% for value in var_list %}
+<tr>
+    <td>{{value.user__username}}</td>
+    <td>
+    <a href = '{% url 'view_report' %}?list_report&user_id={{value.user__id}}&project_id={{value.project}}'>Report</a>
+    </td>
+</tr>
+{% endfor %}
+{% else %}
+{% for value in var_list %}
+<tr>
+    <td>{{value.username}}</td>
+    <td>
+    <a href = '{% url 'view_report' %}?list_report&user_id={{value.id}}&project_id={{project_id}}'>Report</a>
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+</table>
+</body>
+</html>

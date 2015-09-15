@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	{% block title %}
+  <title>
+    Add Team
+  </title>
+  {% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container-fluid">
+      <form method='POST' action=''>
+        <div class="form-group">
+          {% csrf_token %}
+          {% if project %}
+              <h2>{{project.title}}</h2>
+            {% endif %}
+          <table class="table">
+              <input type="hidden" class="form-control" id="edit_report_id" name="project_id" value="{{project.id}}" />
+          {% for field in project_form %}
+            <div class="fieldWrapper">
+              {% if not field.errors %}
+              <tr>
+                <th>{{ field.label_tag }}</th>
+                <td>{{ field }}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+                <td class="has-error">{{ field }}</td>
+              </tr>
+              {% endif %}
+            </div>
+            {% endfor %}
+            <tr>
+              <th>
+                <label>
+                  Select members:
+                </label>
+              </th>
+              <td>
+                <table class="table table-hover table-striped ">
+                  {% for val in team_list %}
+                  <tr>
+                    <td>
+                      <label>
+                        <input name="select_members" type="checkbox" value="{{val.id}}" 
+                        {{val.selected}} />
+                        {{val.username}}
+                      </label>
+                      <td>
+                        
+                        <td>
+                          Involved in {{val.project_count}} active project/s.
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <span>
+            <input type="submit" name='draft' id='draft' class="btn btn-info btn-large" value="Save Team" >
+          </div>
+        </form>
+      </div>
+      {% endblock %}
+    </body>
+  </html>
+  

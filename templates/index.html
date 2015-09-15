@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+		{% block title %}
+        <title>Index</title>
+		{% endblock %}
+</head>
+<body>
+       {% block content %}
+       <div class ="main-box" id="c-panel"> 
+		<ul class="panel-items">
+		<li class="panel-item" id="profile">
+			<a href="{% url 'user_profile' %}"><img src="{% static 'icons/User-Profile-256.png' %}"><span class="panel-text">Profile</span></a></li>
+		{% if access_var == 1 %}
+		<li class="panel-item" id "daily-reports">
+			<a href="{% url 'project' %}"><img src="{% static 'icons/Project-256.png' %}"><span class="panel-text">Projects</span></a></li>
+		{% endif %}
+		{% if access_var == 1 %}
+		<li class="panel-item" id "daily-reports">
+			<a href="{% url 'add_team' %}"><img src="{% static 'icons/Group-Add-256.png' %}"><span class="panel-text">Team</span></a></li>
+		{% endif %}
+		<li class="panel-item" id "daily-reports">
+			<a href="{% url 'view_report' %}"><img src="{% static 'icons/Report-Editor-256.png' %}"><span class="panel-text">Reports</span></a></li>
+		<li class="panel-item" id "daily-reports">
+			<a href="{% url 'review' %}"><img src="{% static 'icons/Double-Check-256.png' %}"><span class="panel-text">Review</span></a></li>
+		<li class="panel-item" id "daily-reports">
+			<a href="{% url 'notification' %}">
+				{% if notice_status == 1 %}
+				<img src="{% static 'icons/Notification-256-red.png' %}"><span class="panel-text">Notification</span></a></li>
+            	{% else %}
+          		<img src="{% static 'icons/Notification-256.png' %}"><span class="panel-text">Notification</span></a></li>	
+          		 {% endif %}
+		</ul>
+	</div>
+		{% endblock %}
+</body>
+</html>

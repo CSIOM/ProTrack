@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="container-fluid">
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Project</th>
+        <th>Duration</th>
+        <th>Date Time</th>
+        <th>Options</th>
+    </tr>
+    {% for value in list %}
+    <tr class="{{value.0}}">
+        <td>{{value.1}}</td>
+        <td>{{value.5}}</td>
+        <td>{{value.2}} | {{value.3 | time:"H:i A"}}</td>
+        <td><span id="report-options" ><a href="{% url 'view_report' %}/?report_id={{value.0}}&user_id={{value.4}}&report_info"><span class="glyphicon glyphicon-file" data-toggle="tooltip" data-placement="top" title="View Report"></span></a> </span> 
+            | 
+        <span id="report-options" ><a href="{% url 'edit_report' %}/?report_id={{value.0}}"><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Report"></span></a></span>
+            |  
+        <span class="delete-report" id="{{value.0}}"><i class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Report" /></span></td>
+    </tr>
+    {% endfor %}
+</table>
+<h3>Total Time: {{total_hours}} Hours {{total_minutes}} Minutes</h3>
+</body>
+</html>

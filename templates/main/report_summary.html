@@ -1,0 +1,34 @@
+{% load i18n %} {% load staticfiles %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/summary.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+    <h4>Report written by
+        {% if login_user != written_by_info.user %}
+        {{written_by_info.user__username}}
+        {% else %}
+        you
+        {% endif %}
+        for {{written_by_info.project__project__title}} on {{written_by_info.date}}</h4>
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>Duration</th>
+                <th>Work Done</th>
+                <th>Struggle</th>
+                <th>Tags</th>
+            </tr>
+            {% for value in list %}
+            <tr>
+                <td width="10%">{{value.duration_in_hours}}</td>
+                <td width="35%">{{value.work_done | safe}}</td>
+                <td width="35%">{{value.struggle}}</td>
+                <td width="20%">{{value.tags}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </body>
+    </html>
+

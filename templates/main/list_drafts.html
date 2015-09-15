@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+	Drafts	
+	</title>
+	{% endblock %}
+</head>
+<body>
+{% block content %}
+   {% for draft in draft_list %}
+<h2>
+  <a href="{{ draft.id }}">
+    {{ draft.content }}
+  </a>
+</h2>
+{% endfor %}
+{% endblock %}
+</body>
+</html>

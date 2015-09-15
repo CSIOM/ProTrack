@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+		List of Posts
+	</title>
+	{% endblock %}
+</head>
+<body>
+{% block content %}
+<table class='list_post'>
+	<tr>
+		<th>Title</th>
+		<th>Options</th>
+	</tr>
+	{% for post in post %}
+	<tr>
+		<td>{{post.title}}</a></td>
+		<td><a href="{% url 'post_list' %}?post={{post.id}}">Edit</a> | 
+			<a href="{% url 'post_list' %}?post={{post.id}}&view=1">View</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

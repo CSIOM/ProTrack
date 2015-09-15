@@ -1,0 +1,241 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700, 400, 300);
+body {
+    background-color: #f7f7f7;
+    font-family: 'open sans', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+    margin-top: 140px;
+}
+
+#heading{
+    text-decoration: none;
+}
+
+.header {
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    margin: 10px 10px 10px 30px;
+}
+.large-header .main-heading {
+    font-size: 30px;
+    letter-spacing: 12px;
+}
+
+.heading-container {
+    float: left;
+    margin-top: -25px;
+}
+.sub-heading {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    color: #06b9fb;
+    font-size: 40px;
+    padding: 25px;
+}
+.about .sub-heading {
+    color: #fafafa;
+}
+.top-bar {
+    top: 0;
+    width: 100%;
+    background-color: #fafafa;
+    height: 50px;
+    position: fixed;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    z-index: 150;
+}
+.primary-nav {
+    margin-right: 50px;
+    float: right;
+    position: relative;
+}
+.primary-nav li {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+button {
+    background-color: #fafafa;
+    border: none;
+    color: #34495e;
+    cursor: pointer;
+    font-size: 16px;
+    outline: 0;
+}
+
+.main-box{
+    max-width: 360px;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.primary-branding{
+    font-family:'Open Sans Fonts', 'sans-serif';
+    font-size: 36px;
+    font-weight:700;
+    text-align: center;
+    letter-spacing: 19px;
+}
+
+.head{
+    color: #34495e;
+}
+
+.panel-item a{
+    text-decoration: none;
+}
+
+.panel-item img{
+    width: 56px;
+    margin-bottom: 100px;
+}
+
+.panel-text{
+    margin:64px -58px;
+    position: absolute;
+    width:60px;
+
+    text-align:center;
+    font-family: 'Open Sans Fonts', 'sans-serif';
+    font-weight: 300;
+    font-size: 14px;
+    color: #135375;
+}
+
+.main-container{
+    width:80%;
+    margin-top: 120px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#long-th{
+    width:16%;
+}
+
+#long-th-2{
+    width:13%;
+}
+
+.custom-form{
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notify-table{
+    width:95% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.issue{
+
+}
+
+.timer{
+    width:35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    height: 200px;
+}
+
+#timer-button{
+    position: relative;
+    margin-top: 10%;
+}
+
+#time{
+    margin-left: auto;
+    margin-right: auto;
+    width: 78%
+}
+
+#hours-value{
+    padding-right: 10px;
+    font-size: 4em;
+    color: #7f8c8d;
+}
+
+#hours-label{
+    color: #95a5a6;
+    font-size: 1.5em;
+}
+
+.button-label{
+    padding-left: 15px;
+}
+
+.reset{
+    padding-left: 15px;
+    width:53%;
+}
+
+@media screen and (max-width: 1000px) {
+    .primary-nav li {
+    display: inline-block;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.large-header .main-heading {
+    font-size: 25px;
+    letter-spacing: 10px;
+}
+}
+
+@media screen and (max-width: 850px) {
+    .primary-nav li {
+    display: inline-block;
+    padding-left: 1px;
+    padding-right: 0px;
+}
+.large-header .main-heading {
+    font-size: 25px;
+    letter-spacing: 6px;
+}
+}
+
+.delete-report {
+     cursor:pointer;
+}
+
+.change-status{
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.glyphicon-trash{
+    color: #D43F3A;
+}
+
+.view-history{
+    float: right;
+    margin-top: -2%;
+}
+
+#pause-button{
+    display: none;
+}
+
+#edit-link{
+    color:#000000;
+}
+
+.change-project-title{
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+#timer-button-right{
+    position: relative;
+    margin-left: 10%;
+}

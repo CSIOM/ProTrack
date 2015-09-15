@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Profile
+    </title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<h3>{{profile_info.first_name}}&nbsp;{{profile_info.last_name}}</h3>
+<table class="table table-hover table-striped ">
+    <tr>
+        <th>Gender</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.gender}}</td>
+    </tr>
+    <tr>
+        <th>Skills</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.skills}}</td>
+    </tr>
+    <tr>
+        <th>Telephone</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.telephone}}</td>
+    </tr>
+    <tr>
+        <th>GitHub Account</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.github}}</td>
+    </tr>
+    <tr>
+        <th id="long-th">BitBucket Account</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.bitbucket}}</td>
+    </tr>
+    <tr>
+        <th>Experience</th>
+        <th id='seprator'>:</th>
+        <td>{{profile_info.experience}}</td>
+    </tr>
+</table>
+<a href="{% url 'user_profile' %}/?update_profile"><input type="button" name='draft' id='edit_profile' class="btn btn-info btn-large" value="Edit Profile" ></a>
+{% endblock %}
+</body>
+</html>

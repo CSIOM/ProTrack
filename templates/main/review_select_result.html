@@ -1,0 +1,33 @@
+<h3>Open For Review</h2>
+<table class="table table-hover table-striped">
+    <tr>
+        <th>Reporter</th>
+        <th>Project</th>
+        <th>Date</th>
+        <th>View Report</th>
+        <th>Options</th>
+    </tr>
+    {% for value in open %}
+    <tr>
+        <td>{{value.user__username}}</td>
+        <td>{{value.project__project__title}}</td>
+        <td>{{value.date}}</td>
+        <td><a href='report_id={{value.id}}&user_id={{value.user}}&report_summary' class='report_summary'>View Report</a></td>
+        {% if value.reviewed__is_claimed %}
+            <td>Claimed for review by {{value.reviewed__reviewer__username}}
+                {% if value.reviewed__reviewer == user_id %}
+                | <a href="{% url 'view_report' %}/?report_id={{value.id}}&user_id={{value.reviewed__reviewer}}&report_info">Review Now</td>
+                {% else %}
+            </td>
+            {% endif %}
+        {% else %}
+            {% if value.user == user_id or value.project__project__manager == user_id %}
+            <td>No one is reviewing this report.</td>
+            {% else %}
+            <td><a id="claim" href="{% url 'review' %}/?claim={{value.id}}">
+                Claim for Review</a></td>
+                {% endif %}
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>

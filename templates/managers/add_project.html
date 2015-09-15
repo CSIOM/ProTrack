@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}
+	<title>
+		Add Project
+	</title>
+	{% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+	<form method='POST' action=''>
+{% csrf_token %}
+<table class='custom-form'>
+{% for field in form %}
+    <div class="fieldWrapper">
+    {% if not field.errors %}
+    <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>{{ field }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+        <td class="has-error">{{ field }}</td>
+    </tr>
+    {% endif %}
+    </div>
+{% endfor %}
+<tr><td>
+<br>
+     <span><input type="submit" name='draft' id='draft' class="btn btn-info btn-large" value="Save Project" ></td>
+     	</table>
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

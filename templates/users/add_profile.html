@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Profile
+    </title>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<form method='POST' >
+	<div class="form-group">
+{% csrf_token %}
+<table class='custom-form'>
+{% for field in profile_form %}
+    <div class="fieldWrapper">
+    {% if not field.errors %}
+    <tr>
+        <th>{{ field.label_tag }}</th>
+        <td>{{ field }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+        <td class="has-error">{{ field }}</td>
+    </tr>
+    {% endif %}
+    </div>
+{% endfor %}
+     <tr><td><br><span>
+     <input type="submit" name='submit' id='submit' class="btn btn-info btn-large" value="Update" >
+     </span></td></tr>
+     </table>
+ </div>
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

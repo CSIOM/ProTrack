@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>
+        Report
+    </title>
+    {% endblock %}
+    {% block extrajs %}
+        <script src="{% static 'js/add_another.js' %}"></script>
+        <script src="{% static 'js/limit_value.js' %}"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('.class_duration_in_hours').timepicker({
+            defaultTime: 'value',
+            minuteStep: 1,
+            disableFocus: true,
+            template: 'dropdown',
+            showMeridian:false
+            })
+        });
+        </script>
+    {% endblock %}
+
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+<form method='POST' >
+    <div class="form-group">
+    {% csrf_token %}
+        <table class="custom-form">
+        {% for field in reportform %}
+            <div class="fieldWrapper">
+                {% if forloop.first %}
+                <tr>
+                    <td>{{field}}</td>
+                </tr>
+                {% elif not field.errors %}
+                <tr>
+                    <th>{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+                    <td class="has-error">{{ field }}</td>
+                </tr>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </table>
+        <br>
+        <table id="myTable" class="table table-hover table-striped ">
+            <tr>
+                <th>Self Rating(%) <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Min: 1 and Max: 200. 100 rating signifies that your effective hours are equal to your applied hours. If you feel that you did an awsome job and someone other will take twice the time than that of yours, you can add 200 in your rating."></th>
+                <th>Duration (Hours) <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Duration of time for which you have worked. You can fractional hours too."></th>
+                <th>Work Done <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Mention the tasks that you have completed."></th>
+                <th>Struggle <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Mention the strugles that you have faced"></th>
+                <th>Tags <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Add some tags realted to your work. Example: HTML, Django, Qt, Scripting etc."></th>
+            </tr>
+            <tr>
+            {% for field in reportitemform %}
+            <div class="fieldWrapper">
+                {% if not field.errors %}
+                    <td>{{ field }}</td>
+                {% else %}
+                    <td class="has-error">{{ field }}</td>
+                {% endif %}
+            </div>
+            {% endfor %}
+            </tr>
+    </table>
+<br>
+     <span>
+     <input id='add_another' class="btn btn-info btn-large" value="Add Another" type="button">
+     <input id='delete_row' class="btn btn-info btn-large" value="Delete Row" type="button">
+     <input type="submit" name='submit' id='submit' class="btn btn-info btn-large" value="Submit" >
+     <script>
+     document.write('<a href="/" class="btn btn-info btn-large">Cancel</a> ');
+     </script>
+     </span>
+ </div>
+        </form>
+</div>
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+		{% block title %}
+        <title>Time Tracking</title>
+		{% endblock %}
+    {% block extrajs %}      
+      <script src="{% static 'js/timer.js' %}"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#timer-status').hide();
+          $('#timer-stoped').hide();
+          $('#timer-paused').hide();
+          $('.time_tracker_report_form').hide();
+        });
+      </script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+<div class="container-fluid">
+  <div class="time_tracker_report_form">
+    <form method='POST' >
+      <div class="form-group">
+        {% csrf_token %}
+          <table class="custom-form">
+            {% for field in reportform %}
+              <div class="fieldWrapper">
+                {% if forloop.first %}
+                  <tr>
+                      <td>{{field}}</td>
+                  </tr>
+                {% elif not field.errors %}
+                  <tr>
+                      <th>{{ field.label_tag }}</th>
+                      <td>{{ field }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                      <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+                      <td class="has-error">{{ field }}</td>
+                  </tr>
+                {% endif %}
+              </div>
+            {% endfor %}
+            {% for field in reportitem %}
+              <div class="fieldWrapper">
+                  {% if not field.errors %}
+                  <tr>
+                      <th>{{ field.label_tag }}</th>
+                      <td>{{ field }}</td>
+                  </tr>
+                  {% else %}
+                  <tr>
+                      <th><font color="#a94442">{{ field.label_tag }}</font></label></th>
+                      <td class="has-error">{{ field }}</td>
+                  </tr>
+                  {% endif %}
+              </div>
+            {% endfor %}
+            </table>
+           <br> 
+            <table class="custom-form">
+            <tr>
+              <td><input class="btn btn-info btn-large btn-block" type='submit' value='Submit'></td>
+              <td class='reset'><button type="button" class="btn btn-danger btn-large btn-block" id="reset-button"><span class="glyphicon glyphicon-time
+glyphicon "></span><span class='button-label' id="reset-button-label">Reset Tracking</span></button></td>
+</tr>
+          </table>
+        </div>
+      </form>
+    </div>
+    {% if timer_stoped == 0 %}
+       <div class ="timer"> 
+       	<div id="time">
+       		<p><span id="hours-value">{{time_string}}</span><span id="hours-label">Hours</span></p>
+       	</div>
+        {% if timer_status == 0 %}
+		<button type="button" class="btn btn-success btn-large btn-block" id="timer-button"><span class="glyphicon glyphicon-off "></span><span class='button-label' id="button-label">Start Timer</span></button>
+    <button type="button" class="btn btn-info btn-large btn-block" id="pause-button"><span id="pause-button-icon" class="glyphicon glyphicon-pause"></span><span class='button-label' id="pause-button-label">Pause Timer</span></button>
+      {% else %}
+      <button type="button" class="btn btn-danger btn-large btn-block" id="timer-button"><span class="glyphicon glyphicon-off "></span><span class='button-label' id="button-label">Stop Timer</span></button>
+      {% if timer_paused == 0 %}
+      <button type="button" class="btn btn-info btn-large btn-block" id="timer-button-pause"><span id="pause-button-icon" class="glyphicon glyphicon-pause"></span><span class='button-label' id="pause-button-label">Pause Timer</span></button>
+      {% else %}
+      <button type="button" class="btn btn-info btn-large btn-block" id="timer-button-pause"><span id="pause-button-icon" class="glyphicon glyphicon-play"></span><span class='button-label' id="pause-button-label">Resume Timer</span></button>
+      {% endif %}
+{% endif %}
+
+	</div>
+  {% endif %}
+  <div class='hidden-values'>
+  <p id="timer-status">{{timer_status}}</p>
+          <p id="timer-stoped">{{timer_stoped}}</p>
+          <p id="timer-paused">{{timer_paused}}</p>
+        </div>
+</div>
+		{% endblock %}
+</body>
+</html>
