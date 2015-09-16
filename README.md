@@ -1,4 +1,4 @@
-DD
+piPi
 ==========
 
 REQUIREMENTS
@@ -10,11 +10,11 @@ REQUIREMENTS
     5.django 1.7
     6.pytz
 
-1) Fork the repositery [DD](http://code.csiom.com/jasvir/project-management) and clone the forked repositery
+1) Fork the repositery [piPi](https://github.com/CSIOM/piPi) and clone the forked repositery
     
     $ git clone 'link to your forked repository'
 
-2) Create a database for DD.
+2) Create a database for piPi.
 3) Edit settings.py file. Things to be edited are:
     
     NAME : <db_name>
